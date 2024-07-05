@@ -1,4 +1,4 @@
-Disclaimer: This repository is intended for studying the Golang language
+## DISCLAIMER: THIS REPOSITORY IS INTENDED FOR STUDYING THE GOLANG LANGUAGE
 
 
 ## E-commerce REST API in Go 

@@ -40,6 +40,31 @@ func TestUserServiceHandlers(t *testing.T) {
 			t.Errorf("expected status code %d, got %d", http.StatusBadRequest, rr.Code)
 		}
 	})
+
+	t.Run("should correctly register the user", func(t *testing.T) {
+		payload := types.RegisterUserPayload{
+			FirstName: "user",
+			LastName:  "123",
+			Email:     "valid@email.com",
+			Password:  "pass",
+		}
+		marshalled, _ := json.Marshal(payload)
+
+		req, err := http.NewRequest(http.MethodPost, "/user/register", bytes.NewBuffer(marshalled))
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		rr := httptest.NewRecorder()
+		router := mux.NewRouter()
+
+		router.HandleFunc("/user/register", handler.handleRegister)
+		router.ServeHTTP(rr, req)
+
+		if rr.Code != http.StatusCreated {
+			t.Errorf("expected status code %d, got %d", http.StatusBadRequest, rr.Code)
+		}
+	})
 }
 
 type mockUserStore struct{}

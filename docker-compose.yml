@@ -1,0 +1,12 @@
+services:
+
+  db:
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mypassword
+      MYSQL_DATABASE: ecommerce
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
